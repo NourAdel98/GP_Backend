@@ -3,22 +3,22 @@ package app.app.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.sql.Date;
 import java.sql.Time;
 
 @Entity
 public class Complaint {
-
     @Id
     private int complaintId;
 
     @Column
     private String description;
 
-    @Column
+    @ManyToOne
     private Disabled disabledId;
 
-    @Column
+    @ManyToOne
     private Helper helperId;
 
     @Column
@@ -52,4 +52,5 @@ public class Complaint {
     public Time getTime() { return time; }
 
     public void setTime(Time time) { this.time = time; }
+
 }

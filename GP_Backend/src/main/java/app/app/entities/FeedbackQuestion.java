@@ -1,19 +1,18 @@
 package app.app.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class FeedbackQuestion {
-
     @Id
     @GeneratedValue
     private int questionId;
 
     @Column
     private String description;
+
+    @ManyToOne
+    private Feedback feedback;
 
     public FeedbackQuestion() { }
 
@@ -24,5 +23,4 @@ public class FeedbackQuestion {
     public String getDescription() { return description; }
 
     public void setDescription(String description) { this.description = description; }
-
 }

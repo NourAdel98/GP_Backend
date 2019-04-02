@@ -1,19 +1,18 @@
 package app.app.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class FeedbackAnswer {
-
     @Id
     @GeneratedValue
     private int answerId;
 
     @Column
     private String description;
+
+    @OneToOne
+    private FeedbackQuestion feedbackQuestion;
 
     public FeedbackAnswer() { }
 

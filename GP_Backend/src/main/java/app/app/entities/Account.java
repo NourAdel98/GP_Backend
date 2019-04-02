@@ -2,7 +2,8 @@ package app.app.entities;
 
 import javax.persistence.*;
 
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Account {
 
     @Id

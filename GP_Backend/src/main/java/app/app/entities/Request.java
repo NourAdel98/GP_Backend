@@ -1,9 +1,6 @@
 package app.app.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Time;
 import java.util.Date;
 
@@ -32,6 +29,15 @@ public class Request {
 
     @Column
     private boolean requestState;
+
+    @ManyToOne
+    private Disabled disabled;
+
+    @ManyToOne
+    private Helper helper;
+
+    @ManyToOne
+    private RequestHistory requestHistory;
 
     public Request() { }
 
@@ -68,4 +74,3 @@ public class Request {
     public void setRequestState(boolean requestState) { this.requestState = requestState; }
 
 }
-

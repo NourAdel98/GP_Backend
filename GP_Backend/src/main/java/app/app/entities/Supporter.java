@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 
 @Entity
 public class Supporter extends Account {
-
     @Column
     private String Address;
 
