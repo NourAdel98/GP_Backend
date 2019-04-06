@@ -1,12 +1,14 @@
 package app.app.entities;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.sql.Time;
 import java.util.Date;
 
 @Entity
 public class Request {
-
     @Id
     @GeneratedValue
     private int requestId;
@@ -29,15 +31,6 @@ public class Request {
 
     @Column
     private boolean requestState;
-
-    @ManyToOne
-    private Disabled disabled;
-
-    @ManyToOne
-    private Helper helper;
-
-    @ManyToOne
-    private RequestHistory requestHistory;
 
     public Request() { }
 

@@ -1,11 +1,13 @@
 package app.app.entities;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
 
+@Inheritance
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Account {
-
     @Id
     private String username;
 
@@ -65,4 +67,5 @@ public class Account {
     public void setAge(int age) {
         this.age = age;
     }
+
 }
