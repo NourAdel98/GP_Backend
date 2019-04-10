@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AccountRepository extends CrudRepository<Account,String> {
 
-    Account findUserByUsernameAndPassword(String username, String password);
+    Account findAccountByEmailAndPassword(String email, String password);
+    Account findAccountByEmail(String email);
 }
