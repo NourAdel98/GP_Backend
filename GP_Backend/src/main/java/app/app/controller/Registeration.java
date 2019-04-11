@@ -15,6 +15,7 @@ public class Registeration {
 
     @Autowired
     private AccountRepository accountRepository;
+    private String email;
 
     @PostMapping("/registerDisabled")
     ResponseEntity<Boolean> registerDisabled(Disabled disabled){
@@ -77,9 +78,17 @@ public class Registeration {
         return response;
     }
 
-    @PostMapping("/sendPassword")
-    ResponseEntity<String> sendPassword(Account account){
+    @PostMapping("/getEmail")
+    ResponseEntity<Account> getEmail(Account account) {
         Account temp=accountRepository.findAccountByEmail(account.getEmail());
+        email=account.getEmail();
+        return new ResponseEntity<>(temp,HttpStatus.OK);
+    }
+
+
+    @PostMapping("/sendPassword")
+    ResponseEntity<String> sendPassword(){
+        Account temp=accountRepository.findAccountByEmail(email);
         String pass=temp.getPassword();
         return ResponseEntity.status(HttpStatus.OK)
                 .body(pass);
