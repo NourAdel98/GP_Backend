@@ -1,6 +1,9 @@
 package app.app.controller;
 
 import app.app.entities.Account;
+import app.app.entities.Disabled;
+import app.app.entities.Helper;
+import app.app.entities.Supporter;
 import app.app.entities.repositories.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,20 +14,48 @@ import org.springframework.web.bind.annotation.*;
 public class Registeration {
 
     @Autowired
-    private AccountRepository userRepository;
+    private AccountRepository accountRepository;
+    private String email;
 
-    @RequestMapping("/welcome")
-    ResponseEntity<String> test(){
-        return new ResponseEntity<>("welcome", HttpStatus.OK);
-    }
-
-    @PostMapping("/register")
-    ResponseEntity<Boolean> register(Account account){
+    @PostMapping("/registerDisabled")
+    ResponseEntity<Boolean> registerDisabled(Disabled disabled){
 
         ResponseEntity<Boolean> response;
-        Account temp = userRepository.findUserByUsernameAndPassword(account.getUsername(), account.getPassword());
+        Account temp = accountRepository.findAccountByEmailAndPassword(disabled.getEmail(), disabled.getPassword());
         if(temp == null){
-            userRepository.save(account);
+            accountRepository.save(disabled);
+            response = new ResponseEntity<>(true, HttpStatus.OK);
+        }
+        else {
+            response = new ResponseEntity<>(false, HttpStatus.OK);
+        }
+
+        return response;
+    }
+
+    @PostMapping("/registerHelper")
+    ResponseEntity<Boolean> registerHelper(Helper helper){
+
+        ResponseEntity<Boolean> response;
+        Account temp = accountRepository.findAccountByEmailAndPassword(helper.getEmail(), helper.getPassword());
+        if(temp == null){
+            accountRepository.save(helper);
+            response = new ResponseEntity<>(true, HttpStatus.OK);
+        }
+        else {
+            response = new ResponseEntity<>(false, HttpStatus.OK);
+        }
+
+        return response;
+    }
+
+    @PostMapping("/registerSupporter")
+    ResponseEntity<Boolean> registerSupporter(Supporter supporter){
+
+        ResponseEntity<Boolean> response;
+        Account temp = accountRepository.findAccountByEmailAndPassword(supporter.getEmail(), supporter.getPassword());
+        if(temp == null){
+            accountRepository.save(supporter);
             response = new ResponseEntity<>(true, HttpStatus.OK);
         }
         else {
@@ -35,10 +66,37 @@ public class Registeration {
     }
 
     @PostMapping("/login")
-    ResponseEntity<Account> login(@RequestParam String username, @RequestParam String pass){
-
-        Account account = userRepository.findUserByUsernameAndPassword(username,pass);
-        System.out.println(account.getUsername() + "  " + account.getPassword());
-        return new ResponseEntity<>(account,HttpStatus.OK);
+    ResponseEntity<Boolean> login(Account account){
+        ResponseEntity<Boolean> response;
+        Account temp = accountRepository.findAccountByEmailAndPassword(account.getEmail(),account.getPassword());
+        if(temp !=null){
+            response = new ResponseEntity<>(true, HttpStatus.OK);
+        }
+        else {
+            response = new ResponseEntity<>(false, HttpStatus.OK);
+        }
+        return response;
     }
+
+    @PostMapping("/getEmail")
+    ResponseEntity<Account> getEmail(Account account) {
+        Account temp=accountRepository.findAccountByEmail(account.getEmail());
+        email=account.getEmail();
+        return new ResponseEntity<>(temp,HttpStatus.OK);
+    }
+
+
+    @PostMapping("/sendPassword")
+    ResponseEntity<String> sendPassword(){
+        Account temp=accountRepository.findAccountByEmail(email);
+        String pass=temp.getPassword();
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(pass);
+    }
+
+
+
+
+
+
 }

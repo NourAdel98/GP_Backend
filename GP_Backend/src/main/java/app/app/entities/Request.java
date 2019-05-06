@@ -9,7 +9,6 @@ import java.util.Date;
 
 @Entity
 public class Request {
-
     @Id
     @GeneratedValue
     private int requestId;
@@ -68,4 +67,3 @@ public class Request {
     public void setRequestState(boolean requestState) { this.requestState = requestState; }
 
 }
-
