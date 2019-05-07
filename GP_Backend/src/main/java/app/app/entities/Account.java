@@ -2,11 +2,11 @@ package app.app.entities;
 
 import javax.persistence.*;
 
-@MappedSuperclass
+@Inheritance
+@Entity
 public class Account {
-
     @Id
-    private String username;
+    private String email;
 
     @Column
     private String fname;
@@ -15,22 +15,22 @@ public class Account {
     private String lname;
 
     @Column
-    private String phoneNumber;
-
-    @Column
     private String password;
 
     @Column
-    private int age;
+    private String age;
+
+    @Column
+    private String phoneNumber;
 
     public Account() {}
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getFname() { return fname; }
@@ -57,11 +57,12 @@ public class Account {
         this.password = password;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
+
 }
