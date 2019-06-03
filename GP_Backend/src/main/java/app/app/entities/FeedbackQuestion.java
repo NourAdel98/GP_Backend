@@ -7,7 +7,6 @@ import javax.persistence.Id;
 
 @Entity
 public class FeedbackQuestion {
-
     @Id
     @GeneratedValue
     private int questionId;

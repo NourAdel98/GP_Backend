@@ -1,6 +1,9 @@
 package app.app.entities.repositories;
 
+import app.app.entities.FeedbackQuestion;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface FeedbackQuestionRepository extends CrudRepository<FeedbackQuestionRepository, Integer> {
+@Repository
+public interface FeedbackQuestionRepository extends CrudRepository<FeedbackQuestion, Integer> {
 }
