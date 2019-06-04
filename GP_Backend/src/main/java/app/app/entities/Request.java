@@ -1,17 +1,21 @@
 package app.app.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.*;
 import java.sql.Time;
 import java.util.Date;
 
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Request {
+
     @Id
     @GeneratedValue
     private int requestId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Service serviceId;
 
     private String disabledId;
 
@@ -21,10 +25,7 @@ public class Request {
     private String location;
 
     @Column
-    private Date date;
-
-    @Column
-    private Time time;
+    private String date;
 
     @Column
     private String payMethod;
@@ -38,6 +39,10 @@ public class Request {
 
     public void setRequestId(int requestId) { this.requestId = requestId; }
 
+    public Service getServiceId() { return serviceId; }
+
+    public void setServiceId(Service serviceId) { this.serviceId = serviceId; }
+
     public String getDisabledId() { return disabledId; }
 
     public void setDisabledId(String disabledId) { this.disabledId = disabledId; }
@@ -50,13 +55,13 @@ public class Request {
 
     public void setLocation(String location) { this.location = location; }
 
-    public Date getDate() { return date; }
+    public String getDate() { return date; }
 
-    public void setDate(Date date) { this.date = date; }
+    public void setDate(String date) { this.date = date; }
 
-    public Time getTime() { return time; }
+    /*public String getTime() { return time; }
 
-    public void setTime(Time time) { this.time = time; }
+    public void setTime(String time) { this.time = time; }*/
 
     public String getPayMethod() { return payMethod; }
 
